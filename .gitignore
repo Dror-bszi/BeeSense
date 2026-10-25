@@ -1,0 +1,34 @@
+# ESP-IDF
+build/
+sdkconfig
+sdkconfig.old
+managed_components/
+dependencies.lock
+
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Python (tools/, analysis scripts)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Node / dashboard
+node_modules/
+dist/
+
+# Captured data and logs (keep these out of git; they can get large)
+*.log
+*.csv.gz
+data/raw/
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
