@@ -1,6 +1,21 @@
-// Hub -> cloud over a cellular modem and a SIM. One modem and one SIM serve
-// the whole group of hives, which is what keeps the recurring cost per hive
-// near zero.
+// Hub -> cloud over a SIMCom A7608E-H (LTE Cat-4, EMEA bands) on a BK-A7608E-H
+// breakout, with a full-band LTE antenna and a GNSS patch antenna. One modem
+// and one SIM serve the whole group of hives, which is what keeps the
+// recurring cost per hive near zero.
+//
+// Two consequences of this particular module:
+//
+//  * PEAK CURRENT. Cat-4 transmit bursts are measured in amps, not
+//    milliamps, against a hub that averages ~0.5 W. The average is fine
+//    (~45 Wh/day from the panel); the supply has to survive the peaks, so the
+//    hub board needs bulk capacitance right at the module. Verify the real
+//    figure against the A7608E-H datasheet before drawing that board.
+//
+//  * GNSS FOR FREE. The module has a GNSS receiver, which makes the hub a
+//    proper time source -- and the hub is what every node sets its clock from
+//    (bs_ack_t carries epoch_s). That means no RTC anywhere in the system and
+//    timestamps that line up across hives, which matters when lead time is a
+//    reported result.
 //
 // Using LTE rather than the ESP32-S3's own Wi-Fi is also a deliberate radio
 // decision: ESP-NOW and station-mode Wi-Fi must share a channel on one radio,

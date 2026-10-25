@@ -13,7 +13,7 @@ This directory is for the circuits built around those parts.
 |---|---|
 | `wake-circuit/` | The nanopower piezo wake circuit: nanopower amp (e.g. TLV8541) + comparator (e.g. TLV3691), adaptive threshold tracking the background, output to an RTC-capable GPIO. Budget ~2 µA. **This is the circuit the whole power story rests on.** |
 | `node-board/` | Node carrier: ESP32-C3 SuperMini, piezo amp path (MCP6002 + bias + protection diodes), HX711 header, 1-Wire, battery holder, low-Iq regulator (MCP1700/HT7333), IP65 gland entries. |
-| `hub-board/` | Hub carrier: ESP32-S3, cellular modem, solar charge path (CN3791, 18 V in), 18650 pack. |
+| `hub-board/` | Hub carrier: ESP32-S3, SIMCom A7608E-H modem (BK-A7608E-H breakout), solar charge path (CN3791, 18 V in), 18650 pack. **The A7608E-H is Cat-4: transmit peaks run to amps**, so size the supply and put bulk capacitance at the module. U.FL pigtails for the LTE and GNSS antennas need gland entries. |
 | `scale-mechanics/` | Load-cell mounts and base board. Cells must sit so only their centre carries load and the edges are free to move — not glued flat to a board. |
 
 ## Decisions already made

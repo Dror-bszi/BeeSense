@@ -7,13 +7,15 @@ static const char *TAG = "uplink";
 esp_err_t uplink_lte_init(void)
 {
     ESP_LOGI(TAG, "init: UART to the modem, probe with AT, read IMEI/SIM state");
-    ESP_LOGI(TAG, "init: TODO -- exact modem model is still unidentified (see docs TODO, HW-16)");
+    ESP_LOGI(TAG, "init: SIMCom A7608E-H (LTE Cat-4) -- AT command set per its datasheet");
     return ESP_OK;
 }
 
 esp_err_t uplink_lte_connect(void)
 {
-    ESP_LOGI(TAG, "connect: power key, wait for network attach, bring up the PPP/data context");
+    ESP_LOGI(TAG, "connect: pulse PWRKEY, wait for the module, then for network attach");
+    ESP_LOGI(TAG, "connect: bring up the PPP/data context on the carrier APN");
+    ESP_LOGI(TAG, "connect: GNSS fix -> set hub time; the nodes all sync from this clock");
     ESP_LOGI(TAG, "connect: log RSSI -- apiary coverage is a field unknown worth recording");
     return ESP_OK;
 }

@@ -36,8 +36,10 @@ baseline happens on the hub.
 
 ## Open items
 
-- **Modem model is unidentified** (HW-16 in the hardware docs) — `uplink_lte`
-  cannot be written against real AT commands until it is.
+- **Modem is a SIMCom A7608E-H** (HW-16), LTE Cat-4 on a BK-A7608E-H breakout
+  with LTE and GNSS antennas. Two design consequences: transmit peaks run to
+  amps, so the hub board needs bulk capacitance at the module; and its GNSS
+  makes the hub the system's time source, so no node needs an RTC.
 - **Board model and PSRAM are unconfirmed** (HW-15). `sdkconfig.defaults`
   enables `CONFIG_SPIRAM`; verify the board actually has it.
 - **Thresholds get frozen.** `hub_config` holds them because the PDR tunes them
