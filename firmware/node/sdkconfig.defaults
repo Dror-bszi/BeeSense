@@ -1,0 +1,19 @@
+# ESP32-C3 hive node. Everything here is aimed at the power budget; revisit
+# after the first real sleep-current measurement.
+CONFIG_IDF_TARGET="esp32c3"
+
+# Single-shot duty cycle: the node is awake ~10 s out of every 15 min, so a
+# slow tick saves nothing and a fast one eases the 2 kHz sampling.
+CONFIG_FREERTOS_HZ=1000
+
+# 10 s x 2 kHz x 2 bytes of samples plus FFT scratch.
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+
+# Console on by default for bench work. TURN THIS OFF for battery runs -- the
+# UART and the log strings cost both current and flash.
+CONFIG_BOOTLOADER_LOG_LEVEL_INFO=y
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+
+# Deep sleep: keep RTC slow memory so wake_source can hold the hold-off stamp
+# and espnow_link can hold the unsent-report backlog.
+CONFIG_ESP_PHY_REDUCE_TX_POWER=y

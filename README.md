@@ -111,15 +111,22 @@ Full catalog with order references, prices and per-component notes lives in
 
 ## Repository layout
 
-Firmware and tooling, planned as the stages below are built:
+ESP-IDF (CMake) for both firmware targets; Python for host-side tooling.
 
 ```
-firmware/node/      ESP32-C3 hive node: sampling, fixed-point FFT, ESP-NOW, deep sleep
-firmware/hub/       ESP32-S3 hub: ESP-NOW receive, baseline, detection, LTE uplink
-hardware/           wake-circuit and node schematics, board files
-tools/              bench-test scripts, log parsing, signal analysis
-dashboard/          per-hive web dashboard
+firmware/shared/beesense_proto/   the node->hub packet, compiled by both projects
+firmware/node/                    ESP32-C3 hive node    (idf.py set-target esp32c3)
+firmware/hub/                     ESP32-S3 apiary hub   (idf.py set-target esp32s3)
+hardware/                         wake-circuit and carrier-board schematics
+tools/                            bench tests and the battery model
+dashboard/                        ingest API and the per-hive web view
 ```
+
+Everything except `tools/battery_life.py` is currently a **scaffold**: each
+module logs what it will do and returns success. Both firmware projects build
+and run, so flashing one prints the entire intended flow with no hardware
+attached — the log output is the working spec. Fix the flow there before
+writing drivers. See the README in each directory for the module breakdown.
 
 ## Status
 

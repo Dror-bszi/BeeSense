@@ -1,0 +1,18 @@
+# ESP32-S3 apiary hub. Always on, solar powered (~0.5 W against ~45 Wh/day),
+# so this one is tuned for headroom rather than for microamps.
+CONFIG_IDF_TARGET="esp32s3"
+
+# The S3 has an FPU, so the baseline and detection code may use float freely --
+# unlike the C3 nodes, which must stay fixed point.
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+CONFIG_FREERTOS_HZ=1000
+
+# A week of per-hive, per-hour statistics plus the spool buffers. Confirm the
+# board actually has PSRAM before relying on this (board model is still TBD).
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_MODE_OCT=y
+
+# Receiver, so the radio is always listening.
+CONFIG_ESP_WIFI_STA_DISCONNECTED_PM_ENABLE=n
+
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
